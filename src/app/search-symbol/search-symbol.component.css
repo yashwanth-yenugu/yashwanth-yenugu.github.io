@@ -1,0 +1,35 @@
+.search-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.response {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: max-content;
+}
+
+.item {
+  display: flex;
+}
+
+.name,
+.value {
+  flex: 1;
+  letter-spacing: normal;
+}
+
+.name {
+  font-weight: 500;
+  color: #7b1fa2;
+}
+
+.error-message {
+  color: red;
+  max-width: fit-content;
+  word-break: break-all;
+  padding-top: 16px;
+}

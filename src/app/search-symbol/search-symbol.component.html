@@ -1,0 +1,51 @@
+<div class="search-container">
+  <form (ngSubmit)="searchSymbol()" autocomplete="off">
+    <mat-form-field appearance="fill">
+      <mat-label>Search Symbol</mat-label>
+      <input matInput type="search" name="search-symbol" [(ngModel)]="value" />
+    </mat-form-field>
+  </form>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    (click)="searchSymbol()"
+  >
+    Search
+  </button>
+</div>
+
+<div class="response" *ngIf="searchResponse$ | async as response">
+  <ng-container *ngIf="response['Error Message']; else elseBlock"
+    ><span class="error-message">{{
+      response["Error Message"]
+    }}</span></ng-container
+  >
+
+  <ng-template #elseBlock>
+    <ng-container #elseBlock *ngFor="let bestMatch of response.bestMatches">
+      <mat-card *ngIf="bestMatch['8. currency'] === 'INR'">
+        <div class="item">
+          <span class="name"> Symbol:</span>
+          <span class="value"> {{ bestMatch["1. symbol"] }}</span>
+        </div>
+        <div class="item">
+          <span class="name"> Name:</span>
+          <span class="value"> {{ bestMatch["2. name"] }}</span>
+        </div>
+        <div class="item">
+          <span class="name"> Type:</span>
+          <span class="value"> {{ bestMatch["3. type"] }}</span>
+        </div>
+        <div class="item">
+          <span class="name"> Region:</span>
+          <span class="value"> {{ bestMatch["4. region"] }}</span>
+        </div>
+        <div class="item">
+          <span class="name"> Match Score:</span>
+          <span class="value"> {{ bestMatch["9. matchScore"] }}</span>
+        </div>
+      </mat-card>
+    </ng-container>
+  </ng-template>
+</div>
